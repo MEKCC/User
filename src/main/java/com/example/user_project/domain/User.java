@@ -8,7 +8,6 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-//@Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +22,8 @@ public class User {
     private String login;
     private String fullName;
     private LocalDate dateOfBirth;
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
 }
 

@@ -2,21 +2,17 @@ package com.example.user_project.controller;
 
 import com.example.user_project.domain.User;
 import com.example.user_project.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("user")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping
     public List<User> getAllUsers() {
@@ -33,3 +29,4 @@ public class UserController {
         userService.updateUser(id, user);
     }
 }
+
