@@ -2,13 +2,13 @@ package com.example.user_project.service.impl;
 
 import com.example.user_project.domain.Gender;
 import com.example.user_project.domain.User;
+import com.example.user_project.exception.LoginAlreadyExistsException;
+import com.example.user_project.exception.UserNotFoundException;
 import com.example.user_project.repo.UserRepo;
 import com.example.user_project.service.UserService;
 import com.example.user_project.util.ValidationUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,8 +29,7 @@ public class UserServiceImpl implements UserService {
         ValidationUtils.checkUserInfo(login, dateOfBirth, gender);
 
         if (userRepo.findByLogin(login) != null) {
-            String message = "user with the same login already exists, please choose another login";
-            throw new ResponseStatusException(HttpStatus.CONFLICT, message);
+            throw new LoginAlreadyExistsException("User with the same login already exists, please choose another login");
         }
 
         User user = User.builder()
@@ -44,12 +43,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(Integer id, User updatedUser) {
-        User user = userRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        user.setLogin(updatedUser.getLogin());
-        user.setFullName(updatedUser.getFullName());
-        user.setDateOfBirth(updatedUser.getDateOfBirth());
-        user.setGender(updatedUser.getGender());
+    public void updateUser(Integer id, String login, String fullName, LocalDate dateOfBirth, Gender gender) {
+        ValidationUtils.checkUserInfo(login, dateOfBirth, gender);
+
+        User user = userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User with such ID does not exist"));
+        user.setLogin(login);
+        user.setFullName(fullName);
+        user.setDateOfBirth(dateOfBirth);
+        user.setGender(gender);
         userRepo.save(user);
     }
 }
