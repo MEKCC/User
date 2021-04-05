@@ -1,9 +1,8 @@
-package com.practice;
+package com.example.user_project.service.impl;
 
 import com.example.user_project.domain.Gender;
 import com.example.user_project.domain.User;
 import com.example.user_project.repo.UserRepo;
-import com.example.user_project.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,14 +10,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.user_project.service.util.InitUser.getOneUser;
+import static com.example.user_project.service.util.InitUser.getUsers;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-import static util.InitUser.getOneUser;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
@@ -30,6 +29,8 @@ public class UserServiceImplTest {
     private static final String FULL_NAME = USER.getFullName();
     private static final LocalDate DATE_OF_BIRTH = USER.getDateOfBirth();
     private static final Gender GENDER = USER.getGender();
+
+    private static final List<User> USERS = getUsers();
 
     @Mock
     private UserRepo userRepo;
@@ -53,9 +54,10 @@ public class UserServiceImplTest {
 
     @Test
     void getAllUsers() {
-        when(userRepo.findAll()).thenReturn(Collections.singletonList(USER));
+        when(userRepo.findAll()).thenReturn(USERS);
         List<User> allUsers = userServiceImpl.getAllUsers();
-        assertEquals(1, allUsers.size());
-        assertEquals("Maksym SecondName", allUsers.get(0).getFullName());
+        assertEquals(2, allUsers.size());
+        assertEquals("Alex Karnov", allUsers.get(0).getFullName());
+        assertEquals("Vika Polishuk", allUsers.get(1).getFullName());
     }
 }
