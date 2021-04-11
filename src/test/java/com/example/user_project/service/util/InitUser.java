@@ -1,7 +1,7 @@
 package com.example.user_project.service.util;
 
-import com.example.user_project.domain.Gender;
-import com.example.user_project.domain.User;
+import com.example.user_project.entity.Gender;
+import com.example.user_project.entity.UserEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,8 +9,8 @@ import java.util.List;
 
 public class InitUser {
 
-    public static User getOneUser() {
-        return User.builder()
+    public static UserEntity getOneUser() {
+        return UserEntity.builder()
                 .login("login")
                 .fullName("Maksym SecondName")
                 .dateOfBirth(LocalDate.of(1991, 1, 9))
@@ -18,17 +18,17 @@ public class InitUser {
                 .build();
     }
 
-    public static List<User> getUsers() {
-        List<User> users = new ArrayList<>();
+    public static List<UserEntity> getUsers() {
+        List<UserEntity> users = new ArrayList<>();
 
-        User firstUser = User.builder()
+        UserEntity firstUser = UserEntity.builder()
                 .login("first")
                 .fullName("Alex Karnov")
                 .dateOfBirth(LocalDate.of(2000, 10, 5))
                 .gender(Gender.MALE)
                 .build();
 
-        User secondUser = User.builder()
+        UserEntity secondUser = UserEntity.builder()
                 .login("second")
                 .fullName("Vika Polishuk")
                 .dateOfBirth(LocalDate.of(1990, 3, 14))

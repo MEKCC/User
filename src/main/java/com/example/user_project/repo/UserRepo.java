@@ -1,11 +1,11 @@
 package com.example.user_project.repo;
 
-import com.example.user_project.domain.User;
+import com.example.user_project.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Integer> {
+public interface UserRepo extends JpaRepository<UserEntity, Integer> {
 
-    User findByLogin(String login);
+    UserEntity findByLogin(String login);
 }

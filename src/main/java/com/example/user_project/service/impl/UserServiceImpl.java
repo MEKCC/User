@@ -1,7 +1,7 @@
 package com.example.user_project.service.impl;
 
-import com.example.user_project.domain.Gender;
-import com.example.user_project.domain.User;
+import com.example.user_project.entity.Gender;
+import com.example.user_project.entity.UserEntity;
 import com.example.user_project.exception.LoginAlreadyExistsException;
 import com.example.user_project.exception.UserNotFoundException;
 import com.example.user_project.repo.UserRepo;
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
 
     @Override
-    public List<User> getAllUsers() {
+    public List<UserEntity> getAllUsers() {
         return userRepo.findAll();
     }
 
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
             throw new LoginAlreadyExistsException("User with the same login already exists, please choose another login");
         }
 
-        User user = User.builder()
+        UserEntity user = UserEntity.builder()
                 .login(login)
                 .fullName(fullName)
                 .dateOfBirth(dateOfBirth)
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     public void updateUser(Integer id, String login, String fullName, LocalDate dateOfBirth, Gender gender) {
         ValidationUtils.checkUserInfo(login, dateOfBirth, gender);
 
-        User user = userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User with such ID does not exist"));
+        UserEntity user = userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User with such ID does not exist"));
         user.setLogin(login);
         user.setFullName(fullName);
         user.setDateOfBirth(dateOfBirth);

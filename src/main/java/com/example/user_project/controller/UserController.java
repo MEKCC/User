@@ -1,6 +1,6 @@
 package com.example.user_project.controller;
 
-import com.example.user_project.domain.User;
+import com.example.user_project.entity.UserEntity;
 import com.example.user_project.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,19 +17,19 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
+    public ResponseEntity<List<UserEntity>> getAllUsers() {
+        List<UserEntity> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Void> addUser(@RequestBody User user) {
+    public ResponseEntity<Void> addUser(@RequestBody UserEntity user) {
         userService.addUser(user.getLogin(), user.getFullName(), user.getDateOfBirth(), user.getGender());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable Integer id, @RequestBody User user) {
+    public ResponseEntity<Void> updateUser(@PathVariable Integer id, @RequestBody UserEntity user) {
         userService.updateUser(id, user.getLogin(), user.getFullName(), user.getDateOfBirth(), user.getGender());
         return new ResponseEntity<>(HttpStatus.OK);
     }

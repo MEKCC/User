@@ -1,4 +1,4 @@
-package com.example.user_project.domain;
+package com.example.user_project.entity;
 
 public enum Gender {
     MALE, FEMALE

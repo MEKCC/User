@@ -1,6 +1,6 @@
 package com.example.user_project.util;
 
-import com.example.user_project.domain.Gender;
+import com.example.user_project.entity.Gender;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;

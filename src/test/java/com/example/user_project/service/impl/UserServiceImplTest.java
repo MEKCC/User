@@ -1,7 +1,7 @@
 package com.example.user_project.service.impl;
 
-import com.example.user_project.domain.Gender;
-import com.example.user_project.domain.User;
+import com.example.user_project.entity.Gender;
+import com.example.user_project.entity.UserEntity;
 import com.example.user_project.repo.UserRepo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {
 
-    private static final User USER = getOneUser();
+    private static final UserEntity USER = getOneUser();
 
     private static final Integer ID = 1;
     private static final String LOGIN = USER.getLogin();
@@ -30,7 +30,7 @@ public class UserServiceImplTest {
     private static final LocalDate DATE_OF_BIRTH = USER.getDateOfBirth();
     private static final Gender GENDER = USER.getGender();
 
-    private static final List<User> USERS = getUsers();
+    private static final List<UserEntity> USERS = getUsers();
 
     @Mock
     private UserRepo userRepo;
@@ -55,7 +55,7 @@ public class UserServiceImplTest {
     @Test
     void getAllUsers() {
         when(userRepo.findAll()).thenReturn(USERS);
-        List<User> allUsers = userServiceImpl.getAllUsers();
+        List<UserEntity> allUsers = userServiceImpl.getAllUsers();
         assertEquals(2, allUsers.size());
         assertEquals("Alex Karnov", allUsers.get(0).getFullName());
         assertEquals("Vika Polishuk", allUsers.get(1).getFullName());
