@@ -33,5 +33,11 @@ public class UserController {
         userService.updateUser(id, user.getLogin(), user.getFullName(), user.getDateOfBirth(), user.getGender());
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("{id}")
+    public ResponseEntity<UserEntity> getUserById(@PathVariable Integer id) {
+        UserEntity user = userService.getUserById(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 }
 

@@ -16,7 +16,7 @@ Several different objects for the database:
 
 {
     "login": "third",
-    "fullName": "Eduard Perkovskyi",
+    "fullName": "Karina Polishuk",
     "dateOfBirth": "1991-10-10",
     "gender": "FEMALE"
 }

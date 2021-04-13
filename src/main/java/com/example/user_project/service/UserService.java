@@ -14,4 +14,6 @@ public interface UserService {
 
     void updateUser(Integer id, String login, String fullName, LocalDate dateOfBirth, Gender gender);
 
+    UserEntity getUserById(Integer id);
+
 }

@@ -53,4 +53,9 @@ public class UserServiceImpl implements UserService {
         user.setGender(gender);
         userRepo.save(user);
     }
+
+    @Override
+    public UserEntity getUserById(Integer id) {
+        return userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User with such ID does not exist"));
+    }
 }
